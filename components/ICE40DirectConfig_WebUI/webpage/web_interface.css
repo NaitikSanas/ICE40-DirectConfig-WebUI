@@ -1,0 +1,249 @@
+body {
+    background-color: #6716b8;
+    font-family: 'VT323';
+    
+}       
+#Title {
+    color: rgb(255, 255, 70);
+    text-align: center;
+    font-size: 50px;
+}
+#button_panel {
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: left; 
+    gap: 5px;
+}
+
+#Conent_window {
+    align-items: center;
+    background-color: #fbe780;
+    width: 300px;
+    height: 170px;
+    flex-direction: row;
+    border: 2px solid #808080; /* Dark gray border */
+    border-right-color: #ffffff; /* Light gray for 3D effect */
+    border-bottom-color: #ffffff;
+    border-top-color: #404040; /* Slightly darker top for 3D illusion */
+    border-left-color: #404040;
+    /* padding: 8px 16px; Adjust padding for size */
+}
+
+.Conent_window_Title {
+    background-color: #af5eff; /* Pastel purple */
+    color: #ffffff; /* White text */
+    padding: 8px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    width: 285px;
+    border-bottom: 2px solid #7a5c99; /* 3D effect */
+}
+
+#interface {
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+    /* align-items: center; */
+    gap: 20px;
+    
+}
+#top {
+    
+    /* align-self: center; */
+}
+.button {
+    width: 150pt;
+    font-family: 'VT323', monospace;
+    font-size: 20px;
+    color: black;
+    background: linear-gradient(to bottom, #fbe780, #fbe780);
+    border: 2px solid #808080;
+    border-right-color: #ffffff;
+    border-bottom-color: #ffffff;
+    border-top-color: #404040;
+    border-left-color: #404040;
+    padding: 8px 16px;
+    cursor: pointer;
+    text-shadow: 1px 1px 0px #ffffff;
+    box-shadow: 2px 2px 0px #404040;
+    outline: none;
+    display: inline-block;
+    margin: 0px;
+    transition: all 0.01s ease;
+    text-align: center; /* Ensures text alignment */
+    display: block; /* Force block behavior */
+}
+
+.button:active {
+    background: linear-gradient(to bottom, #d0d0d0, #f0f0f0);
+    border: 2px solid #404040;
+    border-right-color: #808080;
+    border-bottom-color: #808080;
+    border-top-color: #ffffff;
+    border-left-color: #ffffff;
+    box-shadow: none;
+    transform: translate(2px, 2px);
+}
+
+.button:hover {
+    background: linear-gradient(to bottom, #e0e0e0, #c0c0c0);
+}
+
+
+.window {
+    width: 400px; /* Fixed window width */
+    height: 350px; /* Fixed window height */
+    background-color: #fffbe6; /* Pastel yellow */
+    border: 2px solid #7a5c99; /* Pastel purple border */
+    box-shadow: 4px 4px 0px #7a5c99; /* Shadow for depth */
+    border-radius: 4px; /* Slight rounding */
+    display: flex;
+    flex-direction: column;
+}
+
+.window-title-bar {
+    background-color: #af5eff; /* Pastel purple */
+    color: #ffffff; /* White text */
+    padding: 8px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: bold;
+    border-bottom: 2px solid #7a5c99; /* 3D effect */
+}
+
+
+
+.window-content {
+    flex-grow: 1;
+    padding: 10px;
+    overflow-y: auto; /* Enable vertical scrolling */
+    background-color: #fbe780; /* Pastel yellow */
+    border-bottom: 2px solid #7a5c99; /* Separate content and buttons */
+}
+
+.file-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    margin: 5px 0;
+    background-color: #ffe4b3; /* Lighter pastel yellow for file items */
+    border: 1px solid #7a5c99; /* Match window border */
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.file-item:hover {
+    user-select: none;
+    background-color: #ffd580; /* Darker pastel yellow on hover */
+}
+
+.file-item.selected {
+    background-color: #ffd580; /* Persistent highlight for selected file */
+    border: 2px solid #7a5c99;
+}
+
+.file-item span {
+    flex-grow: 1;
+}
+
+.window-actions {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #fffbe6; /* Match content background */
+}
+
+.action-button {
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    padding: 5px 15px;
+    background-color: #af5eff; /* Pastel purple */
+    color: #ffffff;
+    border: 1px solid #7a5c99;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.action-button:hover {
+    background-color: #c29de6; /* Slightly darker pastel purple */
+}
+
+.action-button:active {
+    background-color: #a578d2; /* Pressed effect */
+}
+
+
+.upload-container {
+    display: inline-block;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    color: rgb(255, 206, 206);
+}
+
+.custom-file-input {
+    width: 150pt;
+    display: none;
+}
+
+#fileName {
+    margin-top: 10px;
+    font-style: italic;
+}
+
+.button_label {
+    width: 125pt;
+    font-family: 'VT323', monospace;
+    font-size: 20px;
+    background: linear-gradient(to bottom, #fbe780, #fbe780);
+    border: 2px solid #808080;
+    border-right-color: #ffffff;
+    border-bottom-color: #ffffff;
+    border-top-color: #404040;
+    border-left-color: #404040;
+    padding: 8px 16px;
+    cursor: pointer;
+    text-shadow: 1px 1px 0px #ffffff;
+    box-shadow: 2px 2px 0px #404040;
+    outline: none;
+    display: inline-block;
+    margin: 0px;
+    transition: all 0.01s ease;
+    text-align: center; /* Ensures text alignment */
+    display: block; /* Force block behavior */
+}
+
+.button_label:active {
+    background: linear-gradient(to bottom, #d0d0d0, #f0f0f0);
+    border: 2px solid #404040;
+    border-right-color: #808080;
+    border-bottom-color: #808080;
+    border-top-color: #ffffff;
+    border-left-color: #ffffff;
+    box-shadow: none;
+    transform: translate(2px, 2px);
+}
+
+.button_label:hover {
+    background: linear-gradient(to bottom, #e0e0e0, #c0c0c0);
+}
+
+p {
+    color: rgb(0, 0, 0);
+    margin: 20px;
+    text-shadow: 1px 1px 0px #ffffff;
+    width: 200px;
+    font-size: 20px;
+
+    display: flex;          /* Use Flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center;    /* Center vertically */
+    /* height: 100%;           Ensure it uses the full height of its parent */
+    text-align: center;     /* Fallback for text alignment */
+}   

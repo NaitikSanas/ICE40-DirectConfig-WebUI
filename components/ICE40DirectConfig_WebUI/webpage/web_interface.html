@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    	<meta name="apple-mobile-web-app-capable" content="yes" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=VT323">
+        <title>
+            EdgeFusion LogicCanvas
+        </title>
+        <link rel="stylesheet" href="web_interface.css">
+        <script src="web_interface.js"></script>
+    </head>
+    <body>
+        <div id = "Title">
+            EdgeFusion ICE40 DirectConfig
+        </div>
+        <hr>
+        <div id = "top">
+            <div id = "interface">
+                <div id = "button_panel">
+                    <!-- <button class="button" id = "upload_btn">Upload</button> -->
+                    <!-- <form action="/file_upload" method="post" enctype="multipart/form-data"> -->
+                    <form id="uploadForm" enctype="multipart/form-data"></form>
+                        <label for="fileInput" class="button_label">Browse...</label>
+                        <input type="file" id="fileInput" class="custom-file-input" accept=".bin" required>
+                        
+                        <button type="button" class="button" onclick="uploadFile()">Upload</button>
+                    </form>                                                             
+                    
+
+                    <button class="button" id = "fetch_files_btn" onclick="fetchFileList()">Refresh Remote File List</button>
+                    <button class="button" id = "configure_btn">Configure FPGA</button>
+                    
+                    
+                </div>
+
+                <!-- <hr> -->
+                <div class="window">
+                    <div class="window-title-bar">Available Configuration Bitstream Files [Remote]</div>
+                    <div class="window-content" id="file-list">
+                        <!-- Dynamically added file items will go here -->
+                    </div>
+                    <!-- <div class="window-actions">
+                        <button class="action-button" onclick="downloadFile()">Download</button>
+                        <button class="action-button" onclick="deleteFile()">Delete</button>
+                    </div> -->
+                </div>
+
+                <div id = "Conent_window">
+                    <div class="Conent_window_Title">Status</div>
+                    <p id="fileName">No file selected.</p>
+                    <hr>
+                    <p id="status"></p>
+                </div>
+            </div>        
+            </div>
+        </div>
+    
+        <script>
+            const fileInput = document.getElementById('fileInput');
+            const fileNameDisplay = document.getElementById('fileName');
+    
+            // Update file name when file is selected
+            fileInput.addEventListener('change', () => {
+                fileNameDisplay.innerText = fileInput.files.length 
+                    ? fileInput.files[0].name 
+                    : "No file selected.";
+            });
+            
+            async function uploadFile() {
+                const status = document.getElementById('status');
+                const fileInput = document.getElementById('fileInput');
+
+                if (!fileInput.files.length) {
+                    status.innerText = "Please select a file.";
+                    return;
+                }
+
+                const file = fileInput.files[0];
+                const formData = new FormData();
+                formData.append('file', file, file.name);
+
+                status.innerText = "Uploading...";
+
+                try {
+                    const response = await fetch('/file_upload', {
+                        method: 'POST',
+                        body: formData,
+                    });
+
+                    if (response.ok) {
+                        const responseText = await response.text(); // Read server response
+                        status.innerText = responseText || "File uploaded successfully!";
+                    } else {
+                        status.innerText = `Upload failed: ${response.statusText}`;
+                    }
+                } catch (error) {
+                    status.innerText = `Error: ${error.message}`;
+                }
+
+                // Refresh the file list
+                fetchFileList();
+            }
+            function addFile(fileName) {
+                const fileList = document.getElementById('file-list');
+
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+                fileItem.onclick = () => selectFile(fileItem, fileName);
+
+                const fileNameSpan = document.createElement('span');
+                fileNameSpan.textContent = fileName;
+
+                fileItem.appendChild(fileNameSpan);
+                fileList.appendChild(fileItem);
+            }
+            function clearFileList() {
+                const fileList = document.getElementById('file-list');
+                fileList.innerHTML = ''; // Remove all child elements
+            }
+            async function parseResponse(responseText) {
+                clearFileList();
+                // Split the response text into individual file names using '\n'
+                const fileNames = responseText.split('\n');
+                
+                // Iterate through each file name
+                for (const fileName of fileNames) {
+                    // Ensure it's not an empty string (in case of trailing newlines)
+                    if (fileName.trim() !== '') {
+                        addFile(fileName.trim());
+                    }
+                }
+            }
+            function fetchFileList() {
+                fetch('/list_files')
+                    .then(response => response.text())
+                    .then(data => {
+                        // document.getElementById('file-list').innerText = data;
+                        parseResponse(data);
+                    })
+                    .catch(err => console.error('Failed to fetch file list:', err));
+            }
+        </script>    
+    </body> 
+</html>
