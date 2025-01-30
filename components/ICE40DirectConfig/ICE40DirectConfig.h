@@ -1,16 +1,14 @@
 #include <stdio.h>
 #include "esp_err.h"
 
-// GPIO Pins
-#define FPGA_CS       GPIO_NUM_40   // SPI_SS
-#define FPGA_RESET    GPIO_NUM_41   // CRESET_B
-#define FPGA_DONE     GPIO_NUM_38  // CDONE (optional)
-#define FPGA_MOSI     GPIO_NUM_39
-#define FPGA_SCK      GPIO_NUM_37
-// SPI Configuration
-#define SPI_HOST          SPI2_HOST
-#define SPI_CLOCK_SPEED   100000000  // 8 MHz
-#define CHUNK_SIZE        20*1024     // Chunk size (1 KB)
+#define FPGA_CS         CONFIG_FPGA_CS
+#define FPGA_RESET      CONFIG_FPGA_RESET
+#define FPGA_DONE       CONFIG_FPGA_DONE
+#define FPGA_MOSI       CONFIG_FPGA_MOSI
+#define FPGA_SCK        CONFIG_FPGA_SCK
+#define SPI_HOST        CONFIG_SPI_HOST
+#define SPI_CLOCK_SPEED CONFIG_SPI_CLOCK_SPEED
+#define CHUNK_SIZE      CONFIG_CHUNK_SIZE
 
 /**
  * @brief Initialized SPI BUS and SPIFFS to Load File into FPGA

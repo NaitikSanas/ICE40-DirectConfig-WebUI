@@ -1,0 +1,52 @@
+menu "ICE40 DirecConfig Configuration"
+
+    config FPGA_CS
+        int "FPGA Chip Select (CS) GPIO"
+        default 40
+        help
+            GPIO number for FPGA chip select (SPI_SS).
+    
+    config FPGA_RESET
+        int "FPGA Reset GPIO"
+        default 41
+        help
+            GPIO number for FPGA reset (CRESET_B).
+    
+    config FPGA_DONE
+        int "FPGA Done GPIO"
+        default 38
+        help
+            GPIO number for FPGA done signal (CDONE, optional).
+    
+    config FPGA_MOSI
+        int "FPGA MOSI GPIO"
+        default 39
+        help
+            GPIO number for FPGA MOSI.
+    
+    config FPGA_SCK
+        int "FPGA SCK GPIO"
+        default 37
+        help
+            GPIO number for FPGA SCK.
+    
+    config SPI_HOST
+        int "SPI Host"
+        default 2
+        help
+            SPI host number (SPI2_HOST).
+    
+    config SPI_CLOCK_SPEED
+        int "SPI Clock Speed (Hz)"
+        default 100000000
+        help
+            Clock speed for SPI communication with FPGA.
+    
+    config CHUNK_SIZE
+        int "Chunk Size (Bytes)"
+        default 20480
+        help
+            Chunk size for data transfer.
+    
+    endmenu
+    
