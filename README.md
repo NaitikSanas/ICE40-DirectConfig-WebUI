@@ -3,4 +3,8 @@ This project implements APIs to load bitstream files from ESP32. ESP32 Stores Bi
 
 Video Demo : https://www.youtube.com/watch?v=FyoyjnMNimQ
 
+# Web Interface
 ![Web Interface Screenshot ](assets/WebInterface.png)
+
+# Connection Diagram 
+![Connections](assets/ICE40-ESP32%20Connections.png)
